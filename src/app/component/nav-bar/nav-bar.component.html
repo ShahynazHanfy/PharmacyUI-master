@@ -1,0 +1,95 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a style="margin-right: 30px;"><img src="../assets/coco/medicine.png" height="60px" alt=""></a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <!-- <li class="nav-item active">
+        <a class="nav-link">Home</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link">PRODUCTS <span class="sr-only">(current)</span></a>
+      </li> -->
+
+      <!-- 
+      <li>
+        <select class="nav-link"> -->
+      <!-- <option *ngFor="let lang of translate.getLangs()" [value]="lang"
+            [selected]="lang === translate.currentLang">
+            {{ lang }}</option> -->
+      <!-- <option value="" disabled selected hidden>Drug Management</option>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="vw">VW</option>
+        </select>
+      </li> -->
+      <li>
+        <p-menubar class="menu" [model]="items"></p-menubar>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" (click)="Logout()" >Log out <i class="fa fa-sign-out" aria-hidden="true"></i> </a>
+    </li> -->
+      <!-- <li class="nav-item">
+        <a class="nav-link">LOGOUT</a>
+      </li> -->
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+
+ <nav class="container mb-4 mt-4">
+        <div class="row">
+          <div class="col-9"></div>
+           <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="logout()">LogOut</button> 
+          <div class="col-3">
+            <select class="custom-select">
+              <option value="en">English</option>
+              <option value="ar">عربي</option>
+            </select>
+          </div>
+        </div>
+      </nav> 
+
+      <!-- <mat-toolbar color="primary" class="nav-bar mat-elevation-z2">
+        <mat-label>Phrase</mat-label>
+        <span class="spacer"></span>
+        <ng-container>
+            <mat-icon>language</mat-icon>
+            <button mat-button [matMenuTriggerFor]="menu">
+                {{siteLanguage}}
+                <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <a mat-menu-item href="/en">English</a>
+                <a mat-menu-item href="/fr">Français</a>
+                <a mat-menu-item href="/de">Deutsch</a>
+            </mat-menu>
+        </ng-container>
+    </mat-toolbar> -->
+    </form>
+    <!-- <mat-toolbar color="primary" class="nav-bar mat-elevation-z2">
+      <mat-label>Phrase</mat-label>
+      <span class="spacer"></span>
+      <ng-container>
+        <mat-icon>language</mat-icon>
+        <button mat-button [matMenuTriggerFor]="menu">
+          {{siteLanguage}}
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item href="/en">English</a>
+          <a mat-menu-item href="/fr">Français</a>
+          <a mat-menu-item href="/de">Deutsch</a>
+        </mat-menu>
+      </ng-container>
+    </mat-toolbar> -->
+  </div>
+</nav>
+
+
+<!-- <router-outlet></router-outlet> -->
+<!--  -->
