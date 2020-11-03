@@ -23,184 +23,167 @@
     </ng-template>
 </p-toast>
 
-<p-table class="container" #dt [value]="drugs" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+<p-table class="container" #dt [value]="drugsDetailsViewModel" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[10,25,50]" [loading]="loading" styleClass="p-datatable-customers" [paginator]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
     [globalFilterFields]="['name','country.name','representative.name','status']">
     <ng-template pTemplate="caption">
         <div class="table-header">
 
-
-            <!-- <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
-            </span> -->
-            <!-- <button type="button" [disabled]="" class="btn btn-primary" routerLink="adddrug" i18n style="float: right;">Add New Drug</button> -->
-           
-
-            <nz-button-group>
-                <button nz-button (click)="log()">DropDown</button>
-                <button nz-button nz-dropdown [nzDropdownMenu]="menu1" nzPlacement="bottomRight">
-                  <i nz-icon nzType="ellipsis"></i>
-                </button>
-              </nz-button-group>
-              <nz-button-group>
-                <button nz-button (click)="log()">DropDown</button>
-                <button nz-button nz-dropdown [nzDropdownMenu]="menu2" nzPlacement="bottomRight">
-                  <i nz-icon nzType="user"></i>
-                </button>
-              </nz-button-group>
-              <nz-button-group>
-                <button nz-button disabled>DropDown</button>
-                <button nz-button disabled nz-dropdown [nzDropdownMenu]="menu3" nzPlacement="bottomRight">
-                  <i nz-icon nzType="ellipsis"></i>
-                </button>
-              </nz-button-group>
-              <button nz-button nz-dropdown [nzDropdownMenu]="menu4">
-                Button
-                <i nz-icon nzType="down"></i>
-               
-              </button>
-              <nz-dropdown-menu #menu1="nzDropdownMenu">
-                <ul nz-menu>
-                  <li nz-menu-item>menu1 1st menu item</li>
-                  <li nz-menu-item>menu1 2nd menu item</li>
-                  <li nz-menu-item>menu1 3rd menu item</li>
-                </ul>
-              </nz-dropdown-menu>
-              <nz-dropdown-menu #menu2="nzDropdownMenu">
-                <ul nz-menu>
-                  <li nz-menu-item>menu2 1st menu item</li>
-                  <li nz-menu-item>menu2 2nd menu item</li>
-                  <li nz-menu-item>menu2 3rd menu item</li>
-                </ul>
-              </nz-dropdown-menu>
-              <nz-dropdown-menu #menu3="nzDropdownMenu">
-                <ul nz-menu>
-                  <li nz-menu-item>menu3 1st menu item</li>
-                  <li nz-menu-item>menu3 2nd menu item</li>
-                  <li nz-menu-item>menu3 3rd menu item</li>
-                </ul>
-              </nz-dropdown-menu>
-              <nz-dropdown-menu #menu4="nzDropdownMenu">
-                <ul nz-menu>
-                  <li nz-menu-item>menu4 1st menu item</li>
-                  <li nz-menu-item>menu4 2nd menu item</li>
-                  <li nz-menu-item>menu4 3rd menu item</li>
-                </ul>
-              </nz-dropdown-menu>
-
-
-            <button type="button" [disabled]="" class="btn btn-primary" routerLink="adddrug" i18n>Add New Drug</button>
+            <!-- <p-button (click)="showModalDialog()" icon="pi pi-external-link" label="Add Category" i18n></p-button> -->
+            <button type="button" [disabled]="" class="btn btn-primary" (click)="showModalDialog()" i18n>Add New
+                Drug</button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th style="margin-left: 5px;" class="row" pSortableColumn="tradeName" i18n>TradeName<p-sortIcon
-                    field="tradeName"></p-sortIcon>
+            <th style="color: black; font-size: large;" pSortableColumn="tradeName" i18n>Trade Name<p-sortIcon
+                    field="price">
+                </p-sortIcon>
             </th>
-            <th pSortableColumn="genericName">GName<p-sortIcon field="genericName" i18n></p-sortIcon>
+            <th style="color: black; font-size: large;" i18n>Drug Image</th>
+
+            <th style="color: black; font-size: large;" pSortableColumn="price" i18n>Price<p-sortIcon field="price">
+                </p-sortIcon>
             </th>
-            <th pSortableColumn="code" i18n>Code<p-sortIcon field="code"></p-sortIcon>
+
+            <th style="color: black; font-size: large;" i18n>Re_Order_Level
             </th>
-            <!-- <th pSortableColumn="strength">Strength<p-sortIcon field="strength"></p-sortIcon>
-            </th> -->
-            <th pSortableColumn="pack" i18n>Pack<p-sortIcon field="pack"></p-sortIcon>
+            <th style="color: black; font-size: large;" pSortableColumn="pack" i18n>Pack<p-sortIcon field="description">
+                </p-sortIcon>
             </th>
-            <!-- <th>License</th> -->
-            <th i18n>ReOrderLevel</th>
-            <th i18n>image</th>
-            <th i18n>Update</th>
-            <th i18n>Delete</th>
+
         </tr>
         <tr>
             <th>
                 <input pInputText style="font-size: 12px; width: 110px;" type="text"
-                    (input)="dt.filter($event.target.value, 'tradeName', 'startsWith')" placeholder="Search by TName"
+                    (input)="dt.filter($event.target.value, 'tradeName', 'startsWith')"
+                    placeholder="Search by Trade Name" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText style="font-size: 12px; width: 120px;" type="text"
+                    (input)="dt.filter($event.target.value, 'price', 'startsWith')" placeholder="Search by Price"
                     class="p-column-filter">
             </th>
             <th>
                 <input pInputText style="font-size: 12px; width: 120px;" type="text"
-                    (input)="dt.filter($event.target.value, 'name', 'startsWith')" placeholder="Search by GName"
-                    class="p-column-filter">
-            </th>
-            <th>
-                <input pInputText style="font-size: 12px; width: 120px;" type="text"
-                    (input)="dt.filter($event.target.value, 'genericName', 'startsWith')" placeholder="Search by Code"
+                    (input)="dt.filter($event.target.value, 'Quentity', 'startsWith')" placeholder="Search by Quantity"
                     class="p-column-filter">
             </th>
             <!-- <th>
                 <input pInputText style="font-size: 12px; width: 120px;" type="text"
-                    (input)="dt.filter($event.target.value, 'code', 'startsWith')" placeholder="Search by Strength"
-                    class="p-column-filter">
+                    (input)="dt.filter($event.target.value, 'descriptionAR', 'startsWith')"
+                    placeholder="Search by descriptionAR" class="p-column-filter">
             </th> -->
-            <th>
-                <input pInputText style="font-size: 12px; width: 120px;" type="text"
-                    (input)="dt.filter($event.target.value, 'Pack', 'startsWith')" placeholder="Search by Pack"
-                    class="p-column-filter">
+            <!-- <th>
+                <span style="font-size: 12px; width: 120px;" type="text"></span>
             </th>
-
             <th>
-                <input pInputText style="font-size: 12px; width: 120px;" type="text"
-                    (input)="dt.filter($event.target.value, 'pack', 'startsWith')" placeholder="Search by GName"
-                    class="p-column-filter">
-            </th>
-            <!--                 
-                <th>
-                    <input  pInputText style="font-size: 12px; width: 120px;" type="text" (input)="dt.filter($event.target.value, 'license', 'startsWith')" 
-                    placeholder="Search by GName" class="p-column-filter">
-                </th> 
-            -->
+                <span style="font-size: 12px; width: 120px;" type="text"></span>
+            </th> -->
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-drug>
+    <ng-template pTemplate="body" let-drugsDetailsViewModel>
         <tr>
             <td>
-                {{drug.tradeName}}
+                {{drugsDetailsViewModel.tradeName}}
             </td>
             <td>
-                {{drug.genericName}}
-            </td>
-            <td>
-                {{drug.code}}
-            </td>
-            <!-- <td>
-                {{drug.strength}}
-            </td> -->
-            <td>
-                {{drug.pack}}
-            </td>
-            <!-- <td>
-                {{drug.license}}
-            </td> -->
-
-            <td>
-                {{drug.reOrderLevel}}
-            </td>
-            <!-- <td>
-                {{drug.barCode}}
-            </td> 
-            -->
-            <td>
-                <img src="http://localhost:51563/api/drugs/getImage/{{drug.img}}" alt=""
+                <img src="http://localhost:51563/api/drugs/getImage/{{drugsDetailsViewModel.img}}" alt=""
                     style="width: 90px ;height: 50px;">
             </td>
-
             <td>
-                <mat-icon color="warn" style="cursor: pointer;" (click)="editRow(drug.id)" i18n>launch</mat-icon>
+                {{drugsDetailsViewModel.price}}
             </td>
             <td>
-                <mat-icon color="primary" style="cursor: pointer;" pRipple class="ui-button-warning"
-                    (click)="confirmmmmmmm(drug.id)" i18n>delete_outline</mat-icon>
-              <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-                <!-- <button type="button" (click)="confirm1()" pButton icon="pi pi-check" label="Confirm"></button> -->
-                <!-- <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
+                {{drugsDetailsViewModel.quentity}}
+
+            </td>
+            <td>
+                {{drugsDetailsViewModel.reOrderLevel}}
+
+            </td>
+            <td>
+                {{drugsDetailsViewModel.pack}}
+
             </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
         <tr>
-            <td colspan="6" i18n>No drugs found.</td>
+            <td colspan="6" i18n>No Drugs found.</td>
         </tr>
     </ng-template>
 </p-table>
+
+
+
+
+
+
+<p-dialog header="" [(visible)]="displayModal" [baseZIndex]="10000" [style]="{width: '35vw'}">
+    <div class="p-grid p-fluid">
+
+
+        <div class="p-col-12 p-md-4 dropdown">
+            <!-- <label>Select Form TheraSub</label>{{subCategory.theraSubID}} -->
+            <select [(ngModel)]="DrugDetailsobj.drugID" name="drugID" class="form-control">
+                <option hidden [value]="" selected>Select Thera Sub </option>
+                <option *ngFor="let the of drugs" value="{{the.id}}">{{the.tradeName}}</option>
+            </select>
+        </div>
+
+        <div class="p-col-12 p-md-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                <!-- <span class="p-inputgroup-addon">www</span> -->
+                <input type="text" pInputText placeholder="Enter Bar_Code" [(ngModel)]="DrugDetailsobj.barCode">
+            </div>
+        </div>
+
+        <div class="p-col-12 p-md-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                <!-- <span class="p-inputgroup-addon">www</span> -->
+                <input type="text" pInputText placeholder="Enter Strength" [(ngModel)]="DrugDetailsobj.strength">
+            </div>
+        </div>
+
+        <div class="p-col-12 p-md-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                <!-- <span class="p-inputgroup-addon">www</span> -->
+                <input type="text" pInputText placeholder="Enter Size" [(ngModel)]="DrugDetailsobj.size">
+            </div>
+        </div>
+        <div class="p-field p-col-12 p-md-4">
+            <label for="basic">Prod_Date</label>
+            <p-calendar inputId="basic" [(ngModel)]="DrugDetailsobj.exp_Date"></p-calendar>
+        </div>
+        <div class="p-field p-col-12 p-md-4">
+            <label for="basic">Prod_Date</label>
+            <p-calendar inputId="basic" [(ngModel)]="DrugDetailsobj.exp_Date"></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-md-4">
+            <div class="p-inputgroup">
+                <!-- <span class="p-inputgroup-addon">www</span> -->
+                <span class="p-inputgroup-addon">$</span>
+                <input type="text" pInputText placeholder="Enter Price" [(ngModel)]="DrugDetailsobj.price">
+            </div>
+        </div>
+
+        <div class="p-col-12 p-md-4">
+            <div class="p-inputgroup">
+                <!-- <span class="p-inputgroup-addon">www</span> -->
+                <span class="p-inputgroup-addon">w</span>
+                <input type="text" pInputText placeholder="Enter License" [(ngModel)]="DrugDetailsobj.license">
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="SubmitDrugDetails()" label="Yes" styleClass="p-button-text" i18n>
+        </p-button>
+        <p-button icon="pi pi-times" (click)="displayModal=false" label="No" i18n></p-button>
+    </ng-template>
+</p-dialog>

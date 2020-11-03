@@ -8,8 +8,9 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  siteLanguage: string = 'English';
+siteLanguage: string = 'English';
 siteLocale: string;
+role:string
 languageList = [
   { code: 'en', label: 'English' },
   { code: 'ar', label: 'arabic' },
@@ -35,9 +36,11 @@ languageList = [
     // console.log(this.siteLocale)    
     // this.siteLanguage = this.languageList.find(f => f.code === this.siteLocale).label;
 
+    this.role = localStorage.getItem("roles")
+    console.log(this.role)
     this.items = [
       {
-
+        
         label: 'Home',
         icon: 'pi pi-home',
         // url: ['/h']
@@ -74,17 +77,22 @@ languageList = [
           {
             label: 'Form',
             routerLink: ['/home/form'],
-            icon: 'pi pi-fw pi-align-center'
+            icon: 'pi pi-fw pi-align-center',
+            visible: this.role =='Admin'
           },
           {
             label: 'Firm',
             icon: 'pi pi-fw pi-align-justify',
             routerLink: ['/home/firm'],
+            visible: this.role =='Admin'
+
           },
           {
             label: 'Supplier',
             icon: 'pi pi-fw pi-align-justify',
             routerLink: ['/home/supplier'],
+            visible: this.role =='Admin'
+
 
           }
 
@@ -133,12 +141,13 @@ languageList = [
         label: 'Employees',
         icon: 'pi pi-fw pi-power-off',
         routerLink: ['employee'],
-
+        visible: this.role =='Admin'
       },
       {
         label: 'All Users',
         icon: 'pi pi-fw pi-power-off',
         routerLink: ['allusers'],
+        visible: this.role =='Admin'
 
       }
     ];

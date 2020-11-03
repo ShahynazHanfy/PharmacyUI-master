@@ -88,6 +88,7 @@ import en from '@angular/common/locales/en';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
 registerLocaleData(en);
 
 
@@ -164,6 +165,7 @@ registerLocaleData(en);
     NzButtonModule,
     NzDropDownModule,
     NzIconModule,
+    VirtualScrollerModule,
     // ConfirmationService,
     RouterModule.forRoot([]),
  

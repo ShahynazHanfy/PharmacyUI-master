@@ -15,6 +15,9 @@ import { map } from 'rxjs/operators';
 import{Pharmacy} from '../Models/Pharmacy'
 import{Pledge} from '../Models/Pledge'
 import{Supplier} from '../Models/Supplier'
+import { DrugDetails } from '../Models/DrugDetails';
+import { DrugAndDrugDetails } from '../Models/Drugs&DrugsDetials';
+
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +37,14 @@ export class DrugService {
 
   GetAll(): Observable <Drug[]>{
     return this.httpClient.get<Drug[]> (`${environment.Drug}`,this.httpHeader) ;
+}
+
+GetAllDrugsDetailsViewModel(id): Observable <DrugAndDrugDetails[]>{
+  return this.httpClient.get<DrugAndDrugDetails[]> (`${environment.DrugAndDrugDetails}${id}`,this.httpHeader) ;
+}
+insertDrugDetailsObj(drugDetail:DrugDetails): Observable <any >{
+
+  return this.httpClient.post<any> (`${environment.DrugDetails}`,drugDetail,this.httpHeader) ;
 }
 
 insertDrug(Drug: Drug): Observable <any >{

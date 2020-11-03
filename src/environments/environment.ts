@@ -5,6 +5,8 @@
 export const environment = {
   
   Drug: 'http://localhost:51563/api/drugs/',
+  DrugDetails: 'http://localhost:51563/api/DrugDetails/',
+  DrugAndDrugDetails: 'http://localhost:51563/api/DrugDetails/GetDrugDetails/',
   Thera: 'http://localhost:51563/api/drugs/thera',
   ActiveThera: 'http://localhost:51563/api/drugs/activethera',
   TheraSub: 'http://localhost:51563/api/drugs/therasub',

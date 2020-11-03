@@ -10,6 +10,7 @@ import { Pharmacy } from 'src/app/Models/Pharmacy';
 import { Pledge } from 'src/app/Models/Pledge';
 import { Supplier } from 'src/app/Models/Supplier';
 import{PharmacyService} from '../../../services/pharmacy.service'
+import {DrugDetails} from '../../../Models/DrugDetails'
 
 @Component({
   selector: 'app-add-order',
@@ -36,6 +37,7 @@ export class AddOrderComponent implements OnInit {
   selectedDrugName:string
   selectedsource:any=null
   selectedTarget:any=null
+  drugDetailsObj:DrugDetails
 
 
   
@@ -59,6 +61,10 @@ export class AddOrderComponent implements OnInit {
       code: '', comments: '', date: new Date(), description: '', number: 0, pharmacyDeliverdID: 2,
       pharmacyID: 0, pledgeID: 0, supplierID: 0,orderDetailList:[],id:0
       
+    }
+    this.drugDetailsObj = {
+      IsActive:true,IsChecked:true,barCode:'',code:'',exp_Date:new Date(),id:0,license:'',pack:'',price:2,
+      prod_Date:new Date(),quentity:20,reOrderLevel:'',size:null,strength:'',drugID:0,pharmacyID:0
     }
     this.newOrder = {
       code: '', comments: '', date: new Date(), description: '', number: 0, pharmacyDeliverdID: 2,
@@ -206,12 +212,12 @@ changeEvent(){
     this.orderDetailObj.tradeName=this.selectedDrug.tradeName
     this.orderDetails.push(this.orderDetailObj)
     console.log("order Detail obj"+this.orderDetailObj)
-    this.selectedDrug=
-    {
-    IsActive:true,code:'',price:0,CountryID:0,FirmID:0,FormID:0,IsChecked:true,ROADID:0,
-    TheraSubGroupID:0,UnitID:0,barCode:'',exp_Date: new Date(),genericName:'',id:0,img:'',
-    license:'',pack:'',prod_Date:new Date(),quentity:0,reOrderLevel:'',strength:'',tradeName:''
-    }
+    // this.selectedDrug=
+    // {
+    // IsActive:true,code:'',price:0,CountryID:0,FirmID:0,FormID:0,IsChecked:true,ROADID:0,
+    // TheraSubGroupID:0,UnitID:0,barCode:'',exp_Date: new Date(),genericName:'',id:0,img:'',
+    // license:'',pack:'',prod_Date:new Date(),quentity:0,reOrderLevel:'',strength:'',tradeName:''
+    // }
     
     this.drugService.GetAll()
     .subscribe(d=> {
