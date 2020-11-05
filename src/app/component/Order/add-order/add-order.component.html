@@ -75,7 +75,7 @@
             <div class="row">
 
                 <div class="col">
-                <label for="" style="color: rgb(180, 15, 15); font-size: 30px;">From</label>
+                    <label for="" style="color: rgb(180, 15, 15); font-size: 30px;">From</label>
 
                     <div class="p-field-radiobutton">
                         <p-radioButton name="city" value="Pharmacy" [(ngModel)]="selectedsource">
@@ -83,8 +83,7 @@
                         <label for="city3" style="margin-left: 10px;">Pharmacy</label>
                     </div>
                     <div class="p-field-radiobutton">
-                        <p-radioButton name="city" value="Supplier" [(ngModel)]="selectedsource"
->
+                        <p-radioButton name="city" value="Supplier" [(ngModel)]="selectedsource">
                         </p-radioButton>
                         <label for="city4" style="margin-left: 10px;">Supplier</label>
                     </div>
@@ -96,17 +95,15 @@
                 </div>
 
                 <div class="col">
-                <label for="" style="color: rgb(180, 15, 15); font-size: 30px;">To</label>
+                    <label for="" style="color: rgb(180, 15, 15); font-size: 30px;">To</label>
 
                     <div class="p-field-radiobutton">
-                        <p-radioButton name="city" value="Pharmacy" [(ngModel)]="selectedTarget"
-                           >
+                        <p-radioButton name="city" value="Pharmacy" [(ngModel)]="selectedTarget">
                         </p-radioButton>
-                        <label for="city3" style="margin-left: 10px;" >Pharmacy</label>
+                        <label for="city3" style="margin-left: 10px;">Pharmacy</label>
                     </div>
                     <div class="p-field-radiobutton">
-                        <p-radioButton name="city" value="Supplier" [(ngModel)]="selectedTarget"
-                            >
+                        <p-radioButton name="city" value="Supplier" [(ngModel)]="selectedTarget">
                         </p-radioButton>
                         <label for="city4" style="margin-left: 10px;">Supplier</label>
                     </div>
@@ -119,21 +116,21 @@
             </div>
             <div class="row">
                 <div style="width: 50%;">
-                <div class="col" *ngIf="selectedsource =='Pharmacy'">
-                    <label class="labelstyle">Select Phrmacy Name</label>
-                    <select [(ngModel)]="order.pharmacyID" name="pharmacy" class="form-control">Profession
-                        <option value="" selected disabled hidden>firm</option>
-                        <option *ngFor="let thhe of pharmacy" value="{{thhe.id}}">{{thhe.name}}</option>
-                    </select>
+                    <div class="col" *ngIf="selectedsource =='Pharmacy'">
+                        <label class="labelstyle">Select Phrmacy Name</label>
+                        <select [(ngModel)]="order.pharmacyID" name="pharmacy" class="form-control">Profession
+                            <option value="" selected disabled hidden>firm</option>
+                            <option *ngFor="let thhe of pharmacy" value="{{thhe.id}}">{{thhe.name}}</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-                <div class="col" *ngIf="selectedTarget =='Supplier'">
+                <!-- <div class="col" *ngIf="selectedTarget =='Supplier'">
                     <label class="labelstyle">Select Supplier Name</label>
                     <select [(ngModel)]="order.supplierID" name="supplier" class="form-control">Profession
                         <option value="" selected disabled hidden>Supplier</option>
                         <option *ngFor="let thhe of supplier" value="{{thhe.id}}">{{thhe.name}}</option>
                     </select>
-                </div>
+                </div> -->
             </div>
 
             <div class="p-grid p-fluid row">

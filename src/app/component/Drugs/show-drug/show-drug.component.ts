@@ -56,6 +56,7 @@ export class ShowDrugComponent implements OnInit {
   EmpRole:string
   public progress: number;
   public message: string;
+  progressBar:number
 
   @Output() public onUploadFinished = new EventEmitter();
 
@@ -109,6 +110,8 @@ export class ShowDrugComponent implements OnInit {
       'Accept-Language': langs
     })
 
+
+
     this.DrugService.GetAllActiveThera()
       .subscribe(Thera => {
         this.Thera = Thera
@@ -161,7 +164,6 @@ export class ShowDrugComponent implements OnInit {
         , error => {
           console.log(error);
         })
-
 
     this.representatives = [
       { name: "Amy Elsner", image: 'barn.png' },
@@ -249,7 +251,13 @@ export class ShowDrugComponent implements OnInit {
     return text;
   }
 
+  lessThan(Quantity:number){
+    return Quantity < 75 && Quantity > 2
+  }
 
+  greaterThan(Quantity:number){
+    return Quantity < 50 && Quantity > 1
+  }
   public uploadFile = (files) => {
     if (files.length === 0) {
       return;
