@@ -49,7 +49,7 @@ insertDrugDetailsObj(drugDetail:DrugDetails): Observable <any >{
 
 insertDrug(Drug: Drug): Observable <any >{
   console.log(Drug+"d")
-  return this.httpClient.post<any> (`${environment.Drug}`,Drug,this.httpHeader) ;
+  return this.httpClient.post<any> (`${environment.PostDrugName}`,Drug,this.httpHeader) ;
 }
   
 getDrug(id: number): Observable <Drug>{

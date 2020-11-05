@@ -42,18 +42,11 @@ import { MessageService } from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import { AdminComponent } from './component/admin/admin.component';
-// import {InputTextModule} from 'primeng/inputtext';
-// import {ButtonModule} from 'primeng/button';
-// import {CheckboxModule} from 'primeng/checkbox';
-// import {RadioButtonModule} from 'primeng/radiobutton';
-// import {DropdownModule} from 'primeng/dropdown';
 import {FileUploadModule} from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {ToolbarModule} from 'primeng/toolbar';
 import {SplitButtonModule} from 'primeng/splitbutton';
-// import { FirmComponent } from './component/firm/firm.component';
-// import { ProductService } from '../app/services/product.service';
 import {RatingModule} from 'primeng/rating';
 import {InputNumberModule} from 'primeng/inputnumber';
 import { FirmComponent } from './component/Firm/firm/firm.component';
@@ -64,12 +57,10 @@ import { HomeComponent } from './component/home/home.component';
 import {FormComponent} from '../app/component/form/form.component';
 import { ShowOrderComponent } from './component/order/show-order/show-order.component';
 import { AddOrderComponent } from './component/Order/add-order/add-order.component'
-// import { RrComponent } from './component/form/form.component';
 import {PickListModule} from 'primeng/picklist';
 import {OrderListModule} from 'primeng/orderlist';
 import {OrderDetails} from '../app/Models/OrderDetails';
 import { EmployeeComponent } from './component/Employee/emplyee/employee.component';
-// import { EmployeeService } from './services/employee.service';
 import { AllUserComponent } from './component/Users/all-user/all-user.component';
 import {DrugService} from '../app/services/drug.service'
 import{TranslateModule,TranslateLoader} from '@ngx-translate/core'
@@ -89,6 +80,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
+
+
 registerLocaleData(en);
 
 
