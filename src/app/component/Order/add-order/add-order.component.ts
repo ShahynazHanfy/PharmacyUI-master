@@ -38,7 +38,9 @@ export class AddOrderComponent implements OnInit {
   selectedsource: any = null
   selectedTarget: any = null
   drugDetailsObj: DrugDetails
-
+  PharmacyID:Number
+  pharmacyObj:Pharmacy
+  pharmacyName:string
 
 
   // checked:boolean=true
@@ -49,16 +51,16 @@ export class AddOrderComponent implements OnInit {
     this.newOrderDetails = []
     this.DrugExistAfterElementDeleted = []
     this.drugService.GetAll().subscribe(drugs => {
-      this.ExistDrugs = drugs, console.log(this.ExistDrugs),
-        this.DrugExistAfterElementDeleted = this.ExistDrugs
-      this.orderDetails = []
-      this.pharmacy = []
+    this.ExistDrugs = drugs, console.log(this.ExistDrugs),
+    this.DrugExistAfterElementDeleted = this.ExistDrugs
+    this.orderDetails = []
+    this.pharmacy = []
 
     });
   }
   ngOnInit() {
     this.order = {
-      code: '', comments: '', date: new Date(), description: '', number: 0, pharmacyDeliverdID: 2,
+      code: '', comments: '', date: new Date(), description: '', number: 0, pharmacyDeliverdID: 0,
       pharmacyID: 0, pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0
 
     }
@@ -67,7 +69,7 @@ export class AddOrderComponent implements OnInit {
       prod_Date: new Date(), quentity: 20, reOrderLevel: '', size: null, strength: '', drugID: 0, pharmacyID: 0
     }
     this.newOrder = {
-      code: '', comments: '', date: new Date(), description: '', number: 0, pharmacyDeliverdID: 2,
+      code: '', comments: '', date: new Date(), description: '', number: 0, pharmacyDeliverdID: 0,
       pharmacyID: 0, pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0
 
     }
@@ -87,6 +89,14 @@ export class AddOrderComponent implements OnInit {
       this.supplier = supplier
     })
 
+  this.PharmacyID=Number(localStorage.getItem("pharmacyID"))
+    this.pharmacyService.getPharmacyById(this.PharmacyID)
+    .subscribe(d=>{
+        this.pharmacyObj=d
+        console.log(this.pharmacyObj)
+        this.pharmacyName=this.pharmacyObj.name
+        console.log(this.pharmacyName)
+    })
     this.drugService.GetAll()
       .subscribe(drugs => {
         this.ExistDrugs = drugs,
@@ -102,12 +112,8 @@ export class AddOrderComponent implements OnInit {
   }
   saveDrug(id) {
     console.log(id)
-    this.order.supplierID = 1;
     this.drugService.getDrugByID(id).subscribe(drug => {
       this.drug = drug;
-
-
-      console.log(this.order);
       //   this.order.number = Number(this.order.number);
       // console.log(element)  
       // element2.setAttribute("value","Added To Form")
@@ -177,12 +183,20 @@ export class AddOrderComponent implements OnInit {
     console.log(this.selectedsource)
 
   }
+  eventForPharmacy(){
+    console.log(this.selectedsource)
+    this.order.pharmacyID=Number(this.PharmacyID)
+    console.log(this.PharmacyID)
+  }
   saveOrderList() {
     console.log("This is selected drug" + this.selectedDrug)
-    // this.orderDetailObj.quentity=Number(this.orderDetailObj.quentity)
+    this.orderDetailObj.quentity=Number(this.orderDetailObj.quentity)
     this.order.pharmacyID = Number(this.order.pharmacyID)
     this.order.supplierID = Number(this.order.supplierID)
-    this.order.number = Number(this.order.number)
+    // this.order.number = Number(this.order.number)
+    if (this.selectedsource=='Pharmacy') {
+      console.log("pharmacy")
+    }
     // if(true){
     //   this.order.pledgeID=null
     // }
@@ -193,7 +207,7 @@ export class AddOrderComponent implements OnInit {
       console.log(order)
     })
 
-    console.log(this.order)
+    console.log("ooorder",this.order)
   }
   SaveToList() {
     this.orderDetailObj.drugId = this.selectedDrug.id

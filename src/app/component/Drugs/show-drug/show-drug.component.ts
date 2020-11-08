@@ -251,7 +251,7 @@ export class ShowDrugComponent implements OnInit {
     return text;
   }
 
-  lessThan(Quantity:number){
+  lessThan(Quantity:number) {
     return Quantity < 75 && Quantity > 2
   }
 

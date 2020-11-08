@@ -76,21 +76,20 @@
 
                 <div class="col">
                     <label for="" style="color: rgb(180, 15, 15); font-size: 30px;">From</label>
-
                     <div class="p-field-radiobutton">
-                        <p-radioButton name="city" value="Pharmacy" [(ngModel)]="selectedsource">
+                        <p-radioButton name="Pharmacy" value="Pharmacy" [(ngModel)]="selectedsource" (click)="eventForPharmacy()">
                         </p-radioButton>
                         <label for="city3" style="margin-left: 10px;">Pharmacy</label>
                     </div>
                     <div class="p-field-radiobutton">
-                        <p-radioButton name="city" value="Supplier" [(ngModel)]="selectedsource">
+                        <p-radioButton name="Supplier" value="Supplier" [(ngModel)]="selectedsource">
                         </p-radioButton>
                         <label for="city4" style="margin-left: 10px;">Supplier</label>
                     </div>
                     <div class="p-field-radiobutton">
-                        <p-radioButton name="city" value="Pledge" [(ngModel)]="selectedsource">
+                        <p-radioButton name="Pledge" value="Pledge" [(ngModel)]="selectedsource">
                         </p-radioButton>
-                        <label for="city4" style="margin-left: 10px;">Pledge</label>
+                        <label for="Pledge" style="margin-left: 10px;">Pledge</label>
                     </div>
                 </div>
 
@@ -117,11 +116,13 @@
             <div class="row">
                 <div style="width: 50%;">
                     <div class="col" *ngIf="selectedsource =='Pharmacy'">
-                        <label class="labelstyle">Select Phrmacy Name</label>
-                        <select [(ngModel)]="order.pharmacyID" name="pharmacy" class="form-control">Profession
-                            <option value="" selected disabled hidden>firm</option>
+                        <!-- <label class="labelstyle">Select Phrmacy Name</label>
+                        <select [(ngModel)]="order.pharmacyID" name="pharmacy" class="form-control">
+                            <option value="" selected disabled>The Name {{pharmacyName}}</option>
                             <option *ngFor="let thhe of pharmacy" value="{{thhe.id}}">{{thhe.name}}</option>
-                        </select>
+                        </select> -->
+                        <div>{{pharmacyName}}</div>
+
                     </div>
                 </div>
                 <!-- <div class="col" *ngIf="selectedTarget =='Supplier'">
