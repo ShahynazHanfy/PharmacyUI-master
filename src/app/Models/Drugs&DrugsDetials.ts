@@ -13,7 +13,7 @@ export class DrugAndDrugDetails {
     reOrderLevel: string;
     barCode: string;
     drugID:number
-    pharmacyID:number
+    pharmacyLoggedInID:number
     tradeName: string;
     genericName: string;
     img: string;

@@ -29,7 +29,7 @@ export class AllUserComponent implements OnInit {
     private pharmacyService:PharmacyService
     ) 
     { 
-    this.NewUser={email:'',role:'',userName:'',password:'M@sTech146',pharmacyName:'',pharmacyID:0};
+    this.NewUser={email:'',role:'',userName:'',password:'M@sTech146',pharmacyName:'',pharmacyLoggedInID:0};
   }
 
   ngOnInit(): void {
@@ -56,8 +56,8 @@ export class AllUserComponent implements OnInit {
   addNewUser()
   {
     console.log(this.NewUser);
-    this.NewUser.pharmacyID=Number(this.NewUser.pharmacyID)
-    this.pharmacyService.getPharmacyById(this.NewUser.pharmacyID).subscribe(pharmacy=>{
+    this.NewUser.pharmacyLoggedInID=Number(this.NewUser.pharmacyLoggedInID)
+    this.pharmacyService.getPharmacyById(this.NewUser.pharmacyLoggedInID).subscribe(pharmacy=>{
         this.pharmacy=pharmacy
         console.log(pharmacy)
         this.NewUser.pharmacyName=this.pharmacy.name
@@ -79,7 +79,7 @@ export class AllUserComponent implements OnInit {
       {
         console.log(event)
         console.log(element)
-        this.NewUser.pharmacyID=element.pharmacyID
+        this.NewUser.pharmacyLoggedInID=element.pharmacyLoggedInID
         this.NewUser.email=element.email;
         this.NewUser.userName=element.name;
       }

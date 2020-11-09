@@ -67,7 +67,7 @@ export class AddDrugComponent implements OnInit {
 
     this.DrugDetailsobj = {
       IsActive: true, IsChecked: true, barCode: '', code: '', exp_Date: new Date(), id: 0, license: '', pack: '', price: 2,
-      prod_Date: new Date(), quentity: 20, reOrderLevel: '',size:0, strength: '', drugID: 0, pharmacyID: 0
+      prod_Date: new Date(), quentity: 20, reOrderLevel: '',size:0, strength: '', drugID: 0, pharmacyLoggedInID: 0
     }
   }
   ngOnInit() 
@@ -157,7 +157,7 @@ export class AddDrugComponent implements OnInit {
     this.Drug.UnitID = Number(this.Drug.UnitID);
     console.log(typeof (this.Drug.TheraSubGroupID));
     this.DrugDetailsobj.price = Number(this.DrugDetailsobj.price)
-    this.DrugDetailsobj.pharmacyID = Number(localStorage.getItem("pharmacyID"))
+    this.DrugDetailsobj.pharmacyLoggedInID = Number(localStorage.getItem("pharmacyLoggedInID"))
 
     console.log("detail" + this.DrugDetailsobj);
     this.DrugDetails.push(this.DrugDetailsobj)

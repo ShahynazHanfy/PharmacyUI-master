@@ -23,6 +23,8 @@ import { Form } from './../../../Models/Form'
 import { Firm } from './../../../Models/Firm'
 import { FirmService } from '../../../services/firm.service'
 import { FormService } from '../../../services/form.service'
+import {OrderVM} from '../../../Models/OrderViewModel'
+import {OrderService} from '../../../services/order.service'
 @Component({
   selector: 'app-show-drug',
   templateUrl: './show-drug.component.html',
@@ -40,7 +42,7 @@ export class ShowDrugComponent implements OnInit {
   drugsDetailsObj: DrugDetails
   loading: boolean = true;
   msgs: Message[] = [];
-  PharmacyId: Number
+  pharmacyLoggedInID: Number
   DrugDetailsobj: DrugDetails
   displayModal: boolean;
   fileToUpload: File;
@@ -82,11 +84,13 @@ export class ShowDrugComponent implements OnInit {
     private http: HttpClient,
     private firmServ: FirmService,
     private formServ: FormService,
-    private confirmationService: ConfirmationService) {
+    private confirmationService: ConfirmationService,
+    private orderService:OrderService
+    ) {
     this.drugsDetails = [], this.drugsDetailsViewModel = [],
 
       
-    this.PharmacyId = Number(localStorage.getItem("pharmacyID"))
+    this.pharmacyLoggedInID = Number(localStorage.getItem("pharmacyLoggedInID"))
     this.EmpRole = localStorage.getItem("roles")
 
     this.Drug = {
@@ -95,12 +99,11 @@ export class ShowDrugComponent implements OnInit {
     }
     this.DrugDetailsobj = {
       IsActive: true, IsChecked: true, barCode: '', code: '', exp_Date: new Date(), id: 0, license: '', pack: '', price: 2,
-      prod_Date: new Date(), quentity: 20, reOrderLevel: '', size: 0, strength: '', drugID: 0, pharmacyID: 0
+      prod_Date: new Date(), quentity: 20, reOrderLevel: '', size: 0, strength: '', drugID: 0, pharmacyLoggedInID: 0
     }
     this.DrugDetailsobj = {
       IsActive: true, IsChecked: true, barCode: '', code: '', exp_Date: new Date(), id: 0, license: '', pack: '', price: null,
-      prod_Date: new Date(), quentity: 0, reOrderLevel: '', size: null, strength: '', drugID: 0, pharmacyID: this.PharmacyId
-
+      prod_Date: new Date(), quentity: 0, reOrderLevel: '', size: null, strength: '', drugID: 0, pharmacyLoggedInID: this.pharmacyLoggedInID
     }
   }
 
@@ -165,6 +168,8 @@ export class ShowDrugComponent implements OnInit {
           console.log(error);
         })
 
+
+   
     this.representatives = [
       { name: "Amy Elsner", image: 'barn.png' },
       { name: "Anna Fali", image: 'Cap.jpg' },
@@ -186,7 +191,7 @@ export class ShowDrugComponent implements OnInit {
       { label: 'Renewal', value: 'renewal' },
       { label: 'Proposal', value: 'proposal' }
     ]
-    this.DrugService.GetAllDrugsDetailsViewModel(this.PharmacyId)
+    this.DrugService.GetAllDrugsDetailsViewModel(this.pharmacyLoggedInID)
       .subscribe(drugs => {
         this.drugsDetailsViewModel = drugs,
           console.log(this.drugsDetailsViewModel),
@@ -301,7 +306,7 @@ export class ShowDrugComponent implements OnInit {
     this.DrugDetailsobj.drugID = Number(this.DrugDetailsobj.drugID)
     // this.DrugDetailsobj.pharmacyID = Number(this.DrugDetailsobj.pharmacyID)
     console.log(this.DrugDetailsobj)
-    console.log(this.PharmacyId)
+    console.log(this.pharmacyLoggedInID)
     this.DrugService.insertDrugDetailsObj(this.DrugDetailsobj)
       .subscribe(Drug => {
         console.log("Mabork y wa74")

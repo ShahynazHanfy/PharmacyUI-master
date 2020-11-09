@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
         console.log(res)
         localStorage.setItem("token",res["token"])
         localStorage.setItem("roles",res["roles"])
-        localStorage.setItem("pharmacyID",res["pharmacyID"])
+        localStorage.setItem("pharmacyLoggedInID",res["pharmacyLoggedInID"])
         console.log(localStorage.getItem("token"))
         this.routee.navigate(['/home/showdrug'])
       }
@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
     )
     // console.log(localStorage.getItem("token"))
     console.log(localStorage.getItem("roles"))
-    console.log(localStorage.getItem("pharmacyID"))
+    console.log(localStorage.getItem("pharmacyLoggedInID"))
     console.log(localStorage)
     // localStorage.clear();
   }

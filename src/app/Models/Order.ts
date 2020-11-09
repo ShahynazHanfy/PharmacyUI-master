@@ -8,8 +8,11 @@ export class Order {
     comments: string;
     date:Date;
     supplierID:number;
-    pharmacyID:number;
-    pharmacyDeliverdID:number;
+    pharmacyLoggedInID:number
+    pharmacySourceID:number
+    // pharmacyID:number;
+    // pharmacyDeliverdID:number;
+    pharmacyTargetID:number
     pledgeID:number
    orderDetailList:OrderDetails[]
   }

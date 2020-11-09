@@ -125,13 +125,13 @@
 
                     </div>
                 </div>
-                <!-- <div class="col" *ngIf="selectedTarget =='Supplier'">
+                <div class="col" *ngIf="selectedTarget =='Supplier'">
                     <label class="labelstyle">Select Supplier Name</label>
                     <select [(ngModel)]="order.supplierID" name="supplier" class="form-control">Profession
                         <option value="" selected disabled hidden>Supplier</option>
                         <option *ngFor="let thhe of supplier" value="{{thhe.id}}">{{thhe.name}}</option>
                     </select>
-                </div> -->
+                </div>
             </div>
 
             <div class="p-grid p-fluid row">
@@ -193,11 +193,11 @@
 
 
 
-        <p-tabPanel header="LOSE ORDER" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990">
+        <p-tabPanel header="List Of Drugs" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990">
             <p-table [value]="orderDetails">
                 <ng-template pTemplate="caption">
                     <div class="p-d-flex p-ai-center p-jc-between">
-                        Orders
+                        Drugs
                         <p-button icon="pi pi-refresh"></p-button>
                     </div>
                 </ng-template>
@@ -239,9 +239,56 @@
                     </div>
                 </ng-template>
             </p-table>
+        </p-tabPanel>
+
+
+
+
+        <p-tabPanel header="List Of orderVM" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990">
+            <p-table [value]="orderVM">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                       List Of Orders
+                        <p-button icon="pi pi-refresh"></p-button>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Name</th>
+                        <th>Quentity</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Expire Date</th>
+                        <th>Delete</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td>{{product.listDetails}}</td>
+                        
+                        
+
+
+                        <!-- <td><p-rating  [readonly]="true" [cancel]="false"></p-rating></td> -->
+                       
+                        <!-- <td><span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span></td> -->
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        In total there are {{orderVM ? orderVM.length : 0 }} products.
+                    </div>
+                </ng-template>
+            </p-table>
 
 
         </p-tabPanel>
+
+
+
+
+
+        
 
         <!-- <p-tabPanel header="LOSE ORDER2" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990">
  

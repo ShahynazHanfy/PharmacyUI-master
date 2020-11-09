@@ -14,5 +14,5 @@ export class DrugDetails {
     reOrderLevel: string;
     barCode: string;
     drugID:number
-    pharmacyID:Number
+    pharmacyLoggedInID:Number
 }

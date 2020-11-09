@@ -42,7 +42,7 @@ export class EmployeeComponent implements OnInit {
    
     this.employee =
     {
-      id:0,name:'',address:'',email:'',pharmacyID:0,telephone:'',pharmacyName:''
+      id:0,name:'',address:'',email:'',pharmacyLoggedInID:0,telephone:'',pharmacyName:''
     }
     
     this.EmployeesService.GetAllEmployees()
@@ -52,7 +52,7 @@ export class EmployeeComponent implements OnInit {
     })
     this.pharmacyService.GetAllPharmacies()
     .subscribe(pharmacy=>{
-    this.employee.pharmacyID=Number(this.employee.pharmacyID)
+    this.employee.pharmacyLoggedInID=Number(this.employee.pharmacyLoggedInID)
       this.pharmacy=pharmacy
     })
     
@@ -62,12 +62,12 @@ export class EmployeeComponent implements OnInit {
   {
     this.employee =
     {
-      id:0,name:'',address:'',email:'',pharmacyID:0,telephone:'',pharmacyName:''
+      id:0,name:'',address:'',email:'',pharmacyLoggedInID:0,telephone:'',pharmacyName:''
     }
     this.pharmacy=[]
     this.pharmacyService.GetAllPharmacies()
     .subscribe(pharmacy=>{
-    this.employee.pharmacyID=Number(this.employee.pharmacyID)
+    this.employee.pharmacyLoggedInID=Number(this.employee.pharmacyLoggedInID)
       this.pharmacy=pharmacy
     })
     
@@ -123,7 +123,7 @@ deleteOneEmp(id:number)
 editEmp()
 {
 console.log(this.empIdRow)
-this.employee.pharmacyID=Number(this.employee.pharmacyID)
+this.employee.pharmacyLoggedInID=Number(this.employee.pharmacyLoggedInID)
 // this.EmployeesService.updateEmp(this.employee,this.empIdRow).subscribe(e=>{
 //   console.log("Mabrook Y bb"),
 //   this.routee.navigate(['home/employee'])

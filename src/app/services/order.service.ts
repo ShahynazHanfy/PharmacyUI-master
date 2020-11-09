@@ -3,6 +3,7 @@ import{Order} from '../Models/Order'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import {OrderVM} from '../Models/OrderViewModel'
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class OrderService {
   GetAll(): Observable <Order[]>{
     return this.httpClient.get<Order[]> (`${environment.order}`,this.httpHeader) ;
 }
+GetAllOrdersByPharmacyId(pharmacyId:Number){
+  return this.httpClient.get<OrderVM[]> (`${environment.orderViewModel}${pharmacyId}`,this.httpHeader) ;
+}
+
 
 insertOrder(Order: Order): Observable <any >{
   console.log(Order+"d")

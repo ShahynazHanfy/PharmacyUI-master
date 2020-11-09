@@ -41,7 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
-import { AdminComponent } from './component/admin/admin.component';
+import { AdminComponent } from '../app/component/admin/admin.component';
 import {FileUploadModule} from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {KeyFilterModule} from 'primeng/keyfilter';

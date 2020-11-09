@@ -11,6 +11,8 @@ import { Pledge } from 'src/app/Models/Pledge';
 import { Supplier } from 'src/app/Models/Supplier';
 import { PharmacyService } from '../../../services/pharmacy.service'
 import { DrugDetails } from '../../../Models/DrugDetails'
+import { OrderVM } from 'src/app/Models/OrderViewModel';
+import {DrugInEachOrder} from '../../../Models/DrugInEachOrder'
 
 @Component({
   selector: 'app-add-order',
@@ -38,9 +40,11 @@ export class AddOrderComponent implements OnInit {
   selectedsource: any = null
   selectedTarget: any = null
   drugDetailsObj: DrugDetails
-  PharmacyID:Number
+  pharmacyLoggedInID:Number
   pharmacyObj:Pharmacy
   pharmacyName:string
+  orderVM:OrderVM[]
+  drugInEachOrder:DrugInEachOrder[]
 
 
   // checked:boolean=true
@@ -55,22 +59,25 @@ export class AddOrderComponent implements OnInit {
     this.DrugExistAfterElementDeleted = this.ExistDrugs
     this.orderDetails = []
     this.pharmacy = []
+    this.orderVM =[]
 
     });
   }
   ngOnInit() {
     this.order = {
-      code: '', comments: '', date: new Date(), description: '', number: 0, pharmacyDeliverdID: 0,
-      pharmacyID: 0, pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0
+      code: '', comments: '', date: new Date(), description: '', number: 0,
+      pharmacyLoggedInID:0,pharmacySourceID:0,pharmacyTargetID:0,
+      pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0
 
     }
     this.drugDetailsObj = {
       IsActive: true, IsChecked: true, barCode: '', code: '', exp_Date: new Date(), id: 0, license: '', pack: '', price: 2,
-      prod_Date: new Date(), quentity: 20, reOrderLevel: '', size: null, strength: '', drugID: 0, pharmacyID: 0
+      prod_Date: new Date(), quentity: 20, reOrderLevel: '', size: null, strength: '', drugID: 0, pharmacyLoggedInID: 0
     }
     this.newOrder = {
-      code: '', comments: '', date: new Date(), description: '', number: 0, pharmacyDeliverdID: 0,
-      pharmacyID: 0, pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0
+      code: '', comments: '', date: new Date(), description: '', number: 0,pharmacyTargetID:0,pharmacySourceID:0,
+      pharmacyLoggedInID:0,
+      pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0
 
     }
     this.orderDetailObj = {
@@ -88,9 +95,18 @@ export class AddOrderComponent implements OnInit {
     this.drugService.GetAllSuppliers().subscribe(supplier => {
       this.supplier = supplier
     })
+    this.pharmacyLoggedInID=Number(localStorage.getItem("pharmacyLoggedInID"))
 
-  this.PharmacyID=Number(localStorage.getItem("pharmacyID"))
-    this.pharmacyService.getPharmacyById(this.PharmacyID)
+    this.pharmacyLoggedInID=Number(this.pharmacyLoggedInID)
+
+    this.orderService.GetAllOrdersByPharmacyId(this.pharmacyLoggedInID).subscribe(A=>{
+      this.orderVM =A
+      
+      console.log("orderVMMM"+this.orderVM)
+    })
+
+
+    this.pharmacyService.getPharmacyById(this.pharmacyLoggedInID)
     .subscribe(d=>{
         this.pharmacyObj=d
         console.log(this.pharmacyObj)
@@ -110,6 +126,8 @@ export class AddOrderComponent implements OnInit {
     console.log(this.DrugExistAfterElementDeleted)
     // console.log(this.order)
   }
+
+  
   saveDrug(id) {
     console.log(id)
     this.drugService.getDrugByID(id).subscribe(drug => {
@@ -185,13 +203,13 @@ export class AddOrderComponent implements OnInit {
   }
   eventForPharmacy(){
     console.log(this.selectedsource)
-    this.order.pharmacyID=Number(this.PharmacyID)
-    console.log(this.PharmacyID)
+    // this.order.pharmacyID=Number(this.PharmacyID)
+    console.log(this.pharmacyLoggedInID)
   }
   saveOrderList() {
     console.log("This is selected drug" + this.selectedDrug)
     this.orderDetailObj.quentity=Number(this.orderDetailObj.quentity)
-    this.order.pharmacyID = Number(this.order.pharmacyID)
+    this.order.pharmacyLoggedInID = Number(this.order.pharmacyLoggedInID)
     this.order.supplierID = Number(this.order.supplierID)
     // this.order.number = Number(this.order.number)
     if (this.selectedsource=='Pharmacy') {
@@ -209,6 +227,8 @@ export class AddOrderComponent implements OnInit {
 
     console.log("ooorder",this.order)
   }
+
+  
   SaveToList() {
     this.orderDetailObj.drugId = this.selectedDrug.id
     this.orderDetailObj.img = this.selectedDrug.img
