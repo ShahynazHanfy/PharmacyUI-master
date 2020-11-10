@@ -5,5 +5,5 @@ export class OrderVM {
     number: number
     description: string
     comments: string
-    listDetails:DrugInEachOrder
+    listDetails:DrugInEachOrder[]
 }

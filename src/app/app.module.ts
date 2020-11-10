@@ -80,8 +80,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import { NodesService } from '../app/services/nodes.service';
 
-
+import {TreeModule} from 'primeng/tree';
 registerLocaleData(en);
 
 
@@ -113,6 +114,7 @@ registerLocaleData(en);
     SliderModule,
     BrowserAnimationsModule,
     FormsModule,
+    TreeModule,
     InputTextareaModule,
     InputTextModule,
     CalendarModule,
@@ -164,7 +166,7 @@ registerLocaleData(en);
  
   ],
   providers: [
-    DrugService,
+    DrugService,NodesService,
     MessageService,ConfirmationService, { provide: NZ_I18N, useValue: en_US },
     // EmployeeService
   ],

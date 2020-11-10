@@ -8,8 +8,8 @@ export class Order {
     comments: string;
     date:Date;
     supplierID:number;
-    pharmacyLoggedInID:number
-    pharmacySourceID:number
+    pharmacyLoggedInID:Number
+    pharmacySourceID:Number
     // pharmacyID:number;
     // pharmacyDeliverdID:number;
     pharmacyTargetID:number

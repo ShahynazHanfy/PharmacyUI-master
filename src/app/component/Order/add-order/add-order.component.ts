@@ -13,6 +13,8 @@ import { PharmacyService } from '../../../services/pharmacy.service'
 import { DrugDetails } from '../../../Models/DrugDetails'
 import { OrderVM } from 'src/app/Models/OrderViewModel';
 import {DrugInEachOrder} from '../../../Models/DrugInEachOrder'
+import {TreeNode} from 'primeng/api'
+import {NodesService} from '../../../services/nodes.service';
 
 @Component({
   selector: 'app-add-order',
@@ -40,16 +42,17 @@ export class AddOrderComponent implements OnInit {
   selectedsource: any = null
   selectedTarget: any = null
   drugDetailsObj: DrugDetails
-  pharmacyLoggedInID:Number
+  pharmacyLoggedInIDInlocalStorage:Number
   pharmacyObj:Pharmacy
   pharmacyName:string
   orderVM:OrderVM[]
   drugInEachOrder:DrugInEachOrder[]
 
 
-  // checked:boolean=true
   DrugExistAfterElementDeleted: Drug[]
-  constructor(private drugService: DrugService, private orderService: OrderService, private pharmacyService: PharmacyService) {
+  constructor(private drugService: DrugService,
+    private nodeService: NodesService,
+    private orderService: OrderService, private pharmacyService: PharmacyService) {
 
     this.DrugAdded = []
     this.newOrderDetails = []
@@ -60,6 +63,7 @@ export class AddOrderComponent implements OnInit {
     this.orderDetails = []
     this.pharmacy = []
     this.orderVM =[]
+    
 
     });
   }
@@ -70,6 +74,8 @@ export class AddOrderComponent implements OnInit {
       pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0
 
     }
+   
+ 
     this.drugDetailsObj = {
       IsActive: true, IsChecked: true, barCode: '', code: '', exp_Date: new Date(), id: 0, license: '', pack: '', price: 2,
       prod_Date: new Date(), quentity: 20, reOrderLevel: '', size: null, strength: '', drugID: 0, pharmacyLoggedInID: 0
@@ -86,7 +92,7 @@ export class AddOrderComponent implements OnInit {
     this.pharmacyService.GetAllPharmacies()
       .subscribe(pharmacy => {
         this.pharmacy = pharmacy
-        console.log("pharmacies" + this.pharmacy)
+        console.log("pharmacies" + this.pharmacy)  
       })
 
     this.drugService.GetAllPledges().subscribe(pledge => {
@@ -95,18 +101,16 @@ export class AddOrderComponent implements OnInit {
     this.drugService.GetAllSuppliers().subscribe(supplier => {
       this.supplier = supplier
     })
-    this.pharmacyLoggedInID=Number(localStorage.getItem("pharmacyLoggedInID"))
+    this.pharmacyLoggedInIDInlocalStorage=Number(localStorage.getItem("pharmacyLoggedInID"))
 
-    this.pharmacyLoggedInID=Number(this.pharmacyLoggedInID)
+    this.pharmacyLoggedInIDInlocalStorage=Number(this.pharmacyLoggedInIDInlocalStorage)
 
-    this.orderService.GetAllOrdersByPharmacyId(this.pharmacyLoggedInID).subscribe(A=>{
-      this.orderVM =A
-      
-      console.log("orderVMMM"+this.orderVM)
+    this.orderService.GetAllOrdersByPharmacyId(this.pharmacyLoggedInIDInlocalStorage).subscribe(A=>{
+      this.orderVM = A
     })
 
 
-    this.pharmacyService.getPharmacyById(this.pharmacyLoggedInID)
+    this.pharmacyService.getPharmacyById(this.pharmacyLoggedInIDInlocalStorage)
     .subscribe(d=>{
         this.pharmacyObj=d
         console.log(this.pharmacyObj)
@@ -122,9 +126,7 @@ export class AddOrderComponent implements OnInit {
           console.log(error);
         });
 
-    // this.selectedsource = "pharmacy"
     console.log(this.DrugExistAfterElementDeleted)
-    // console.log(this.order)
   }
 
   
@@ -132,27 +134,7 @@ export class AddOrderComponent implements OnInit {
     console.log(id)
     this.drugService.getDrugByID(id).subscribe(drug => {
       this.drug = drug;
-      //   this.order.number = Number(this.order.number);
-      // console.log(element)  
-      // element2.setAttribute("value","Added To Form")
-      // element2.setAttribute("style","background-color: green;")
-      console.log(drug)
       this.DrugAdded.push(drug)
-      // var element = document.querySelector("#t");
-      // console.log(element)  
-      // element.setAttribute("value","Added To Form")
-      // element.setAttribute("style","background-color: #2196F3;")
-
-      // var element2 = document.querySelector("#tt");
-      // console.log(element)  
-      // element2.setAttribute("value","Added To Form")
-      // element2.setAttribute("style","background-color: green;")
-
-      // this.ExistDrugs.splice()
-      // this.ExistDrugs.splice(this.ExistDrugs.indexOf(drug), 1) 
-      // this.drugService.GetAll().subscribe(drugs => {this.ExistDrugs = drugs,console.log(this.ExistDrugs)});
-
-      // this.DrugAdded.splice(this.DrugAdded.indexOf(drug), 1) 
     })
     // this.drug.IsChecked = !this.drug.IsChecked
   }
@@ -167,8 +149,6 @@ export class AddOrderComponent implements OnInit {
 
         this.DrugAdded.splice(index, 1);
       }
-      //  console.log(this.DrugAdded.indexOf()) 
-      //   this.DrugAdded.splice(this.DrugAdded.indexOf(this.drug1), 1) 
     })
   }
 
@@ -203,24 +183,21 @@ export class AddOrderComponent implements OnInit {
   }
   eventForPharmacy(){
     console.log(this.selectedsource)
-    // this.order.pharmacyID=Number(this.PharmacyID)
-    console.log(this.pharmacyLoggedInID)
+    console.log(this.pharmacyLoggedInIDInlocalStorage)
   }
   saveOrderList() {
-    console.log("This is selected drug" + this.selectedDrug)
     this.orderDetailObj.quentity=Number(this.orderDetailObj.quentity)
+    this.order.pharmacyLoggedInID=this.pharmacyLoggedInIDInlocalStorage
     this.order.pharmacyLoggedInID = Number(this.order.pharmacyLoggedInID)
+    this.order.pharmacyTargetID= Number(this.order.pharmacyTargetID)
     this.order.supplierID = Number(this.order.supplierID)
-    // this.order.number = Number(this.order.number)
+    this.order.number = Number(this.order.number)
     if (this.selectedsource=='Pharmacy') {
       console.log("pharmacy")
+      this.order.pharmacySourceID=this.pharmacyLoggedInIDInlocalStorage
     }
-    // if(true){
-    //   this.order.pledgeID=null
-    // }
     this.order.orderDetailList = this.orderDetails
-    console.log("orderDetailsObj" + this.orderDetailObj)
-    console.log("orderDetails" + this.orderDetails)
+
     this.orderService.insertOrder(this.order).subscribe(order => {
       console.log(order)
     })
@@ -228,7 +205,6 @@ export class AddOrderComponent implements OnInit {
     console.log("ooorder",this.order)
   }
 
-  
   SaveToList() {
     this.orderDetailObj.drugId = this.selectedDrug.id
     this.orderDetailObj.img = this.selectedDrug.img
@@ -236,14 +212,6 @@ export class AddOrderComponent implements OnInit {
     this.orderDetailObj.price = Number(this.orderDetailObj.price)
     this.orderDetailObj.tradeName = this.selectedDrug.tradeName
     this.orderDetails.push(this.orderDetailObj)
-    console.log("order Detail obj" + this.orderDetailObj)
-    // this.selectedDrug=
-    // {
-    // IsActive:true,code:'',price:0,CountryID:0,FirmID:0,FormID:0,IsChecked:true,ROADID:0,
-    // TheraSubGroupID:0,UnitID:0,barCode:'',exp_Date: new Date(),genericName:'',id:0,img:'',
-    // license:'',pack:'',prod_Date:new Date(),quentity:0,reOrderLevel:'',strength:'',tradeName:''
-    // }
-
     this.drugService.GetAll()
       .subscribe(d => {
         this.ExistDrugs = d
@@ -251,16 +219,11 @@ export class AddOrderComponent implements OnInit {
     this.orderDetailObj = {
       quentity: 0, price: 0, orderId: 0, drugId: 0, exp_Date: new Date(), prod_Date: new Date(), img: '', tradeName: ''
     }
-    console.log(this.orderDetails)
-    console.log(this.selectedsource)
   }
 
 
   deleteDrugFromList(drugDetails) {
-    console.log(this.orderDetails)
-    console.log(drugDetails)
     this.orderDetails.splice(this.orderDetails.indexOf(drugDetails), 1);
-    console.log("After removing 1: " + this.orderDetails);
   }
 
 
