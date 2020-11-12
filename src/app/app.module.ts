@@ -81,8 +81,10 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { NodesService } from '../app/services/nodes.service';
-
+import {PanelMenuModule} from 'primeng/panelmenu';
 import {TreeModule} from 'primeng/tree';
+
+
 registerLocaleData(en);
 
 
@@ -161,6 +163,7 @@ registerLocaleData(en);
     NzDropDownModule,
     NzIconModule,
     VirtualScrollerModule,
+    PanelMenuModule,
     // ConfirmationService,
     RouterModule.forRoot([]),
  

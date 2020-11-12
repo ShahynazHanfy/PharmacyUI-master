@@ -2,6 +2,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import {PharmacyService} from '../../services/pharmacy.service'
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -10,6 +11,8 @@ import { MenuItem } from 'primeng/api';
 export class NavBarComponent implements OnInit {
 siteLanguage: string = 'English';
 siteLocale: string;
+pharmacyName:string
+pharmacyID:Number
 role:string
 languageList = [
   { code: 'en', label: 'English' },
@@ -17,7 +20,7 @@ languageList = [
 ];
   items: MenuItem[];
   lang;
-  constructor(private routee: Router) { }
+  constructor(private routee: Router,private pharmacyService:PharmacyService) { }
 
   // changeLang(lang) {
   //   console.log(lang)
@@ -35,6 +38,10 @@ languageList = [
     // this.siteLocale = window.location.pathname.split('/')[1];
     // console.log(this.siteLocale)    
     // this.siteLanguage = this.languageList.find(f => f.code === this.siteLocale).label;
+    
+
+
+
 
     this.role = localStorage.getItem("roles")
     console.log(this.role)

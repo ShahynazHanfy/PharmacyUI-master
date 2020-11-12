@@ -3,6 +3,7 @@ export class DrugInEachOrder{
     drugID: number
     supplierID: number
     supplierName: string
+    pendingStatus:boolean
     drugName: string
     quentity: number
     price: number

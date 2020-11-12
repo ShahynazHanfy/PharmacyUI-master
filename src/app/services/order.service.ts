@@ -22,8 +22,15 @@ export class OrderService {
   GetAll(): Observable <Order[]>{
     return this.httpClient.get<Order[]> (`${environment.order}`,this.httpHeader) ;
 }
-GetAllOrdersByPharmacyId(pharmacyId:Number){
-  return this.httpClient.get<OrderVM[]> (`${environment.orderViewModel}${pharmacyId}`,this.httpHeader) ;
+GetAllOrdersByPharmacySourceId(pharmacyId:Number){
+  return this.httpClient.get<OrderVM[]> (`${environment.orderViewModelByPharmacySource}${pharmacyId}`,this.httpHeader) ;
+}
+
+GetAllOrdersByPharmacyTargetId(pharmacyId:Number){
+  return this.httpClient.get<OrderVM[]> (`${environment.orderViewModelByPharmacyTarget}${pharmacyId}`,this.httpHeader) ;
+}
+UpdatePendingStatus(orderId:Number){
+  return this.httpClient.get<OrderVM[]> (`${environment.orderViewModelPutPendingStatus}${orderId}`,this.httpHeader) ;
 }
 
 

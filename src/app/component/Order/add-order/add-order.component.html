@@ -140,10 +140,18 @@
                     <div *ngIf="selectedTarget =='Pharmacy'" class="col" style="width: 50%;">
                         <label class="labelstyle" style="margin-top: 20px; font-weight: bold;">Select Pharmacy
                             Name</label>
-                            <select [(ngModel)]="order.pharmacyTargetID" name="pharmacy" class="form-control">
-                                <!-- <option value="" selected disabled>The Name {{pharmacyName}}</option> -->
-                                <option *ngFor="let thhe of pharmacy" value="{{thhe.id}}">{{thhe.name}}</option>
-                            </select> 
+                        <select [(ngModel)]="order.pharmacyTargetID" name="pharmacy" class="form-control">
+                            <!-- <option value="" selected disabled>The Name {{pharmacyName}}</option> -->
+                            <option *ngFor="let thhe of pharmacy" value="{{thhe.id}}">{{thhe.name}}</option>
+                        </select>
+                    </div>
+
+                    <div *ngIf="selectedTarget =='Pledge'" class="col" style="width: 50%;">
+                        <label class="labelstyle" style="margin-top: 20px; font-weight: bold;">Select Pledge
+                            Name</label>
+                        <select [(ngModel)]="order.pledgeID" name="pledge" class="form-control">
+                            <option *ngFor="let thhe of pledges" value="{{thhe.id}}">{{thhe.name}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -298,16 +306,30 @@
  -->
 
 
-        <p-tabPanel header="List Of orderVM" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990">
-            <!-- <h5>Regular Scroll</h5>
-            <p-tree [value]="orderVM" scrollHeight="200px"></p-tree>  -->
-
-            <tr *ngFor="let item of orderVM">
-                <td>{{item.orderId}}</td>
-                <td *ngFor="let quality of item.listDetails">{{ quality.drugName }}</td>
-                <!-- <td *ngFor="let quality2 of item.quality2">{{quality2}}</td> -->
-            </tr>
-
+        <p-tabPanel header="ORDER SENT TO " leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990">
+            <div style="width: 100%;">
+                <p-accordion *ngFor="let item of orderVM">
+                    <div style="float: right; margin-left: 50px;">
+                        <button class="btn btn-success" style="margin-right: 10px;">delivered</button>
+                        <!-- <button class="btn btn-danger">Delete</button> -->
+                    </div>
+                    <p-accordionTab header={{item.number}}>
+                        <p class="col" *ngIf="item.pharmacyTargetId != 0 " style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Delivered To
+                            <span style="color: rgb(28, 6, 153);"> {{item.pharmacyTarget}}</span> Pharmacy</p>
+                            <p class="col" *ngIf="item.pledgeId != 0 && item.supplierID==null " style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Delivered To
+                                <span style="color: rgb(28, 6, 153);"> {{item.pledgeName}}</span> Pledge</p>
+                                <p class="col" *ngIf="item.supplierID != null" style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Delivered To
+                                    <span style="color: rgb(28, 6, 153);"> {{item.supplierName}}</span> Company</p>
+                        <p-accordion *ngFor="let quality of item.listDetails">
+                            <p-accordionTab header={{quality.drugName}}>
+                                <div class="row">
+                                    <!-- <p class="col">{{quality.drugName}}</p> -->
+                                </div>
+                            </p-accordionTab>
+                        </p-accordion>
+                    </p-accordionTab>
+                </p-accordion>
+            </div>
 
 
             <!-- <button type="button" (click)="showDialog()" pButton icon="pi pi-external-link" label="View"></button>
@@ -331,95 +353,53 @@
 
 
 
-        <p-tabPanel header="LOSE ORDER2" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990">
+        <p-tabPanel header="ORDERS DELIVERED FROM" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990">
+            <div style="width: 100%;">
+                <p-accordion *ngFor="let item of orderVM2">
+                    <div style="float: right; margin-left: 50px;" *ngIf="item.pendingStatus == true">
+                        <button class="btn btn-success" style="margin-right: 10px;"
+                            (click)="UpdatePendingStatus(item.orderId)">Pending</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </div>
+                    <p-accordionTab header={{item.number}} *ngIf="item.pendingStatus == true">
+                        <p class="col" style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Sent
+                            From
+                            <span style="color: rgb(28, 6, 153);"> {{item.pharmacySource}}</span> Pharmacy</p>
+                        <p-accordion *ngFor="let quality of item.listDetails">
+                            <p-accordionTab header={{quality.drugName}}>
+                                <div class="row">
+                                    <!-- <p class="col">{{quality.drugName}}</p> -->
+                                </div>
+                            </p-accordionTab>
+                        </p-accordion>
+                    </p-accordionTab>
+                </p-accordion>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="CONFIRMIED DELIVERED ORDERS" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990" >
+            <div style="width: 100%;">
+                <p-accordion *ngFor="let item of orderVM2">
+                    <div style="float: right; margin-left: 50px;" *ngIf="item.pendingStatus == false">
+                        <button class="btn btn-success" style="margin-right: 10px;"
+                            (click)="UpdatePendingStatus(item.orderId)">Confirmed</button>
+                    </div>
+                    <p-accordionTab header={{item.number}} *ngIf="item.pendingStatus == false">
+                        <p class="col" style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Sent
+                            From
+                            <span style="color: rgb(28, 6, 153);"> {{item.pharmacySource}}</span> Pharmacy</p>
+                        <p-accordion *ngFor="let quality of item.listDetails">
+                            <p-accordionTab header={{quality.drugName}}>
+                                <div class="row">
+                                    <!-- <p class="col">{{quality.drugName}}</p> -->
+                                </div>
+                            </p-accordionTab>
+                        </p-accordion>
+                    </p-accordionTab>
+                </p-accordion>
+            </div>
+        </p-tabPanel>
 
 
-            <p-table [value]="orderVM" dataKey="name">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="width: 3rem"></th>
-                        <th pSortableColumn="name">Order Number <p-sortIcon field="orderNumber"></p-sortIcon>
-                        </th>
-                        <!-- <th>Image</th> -->
-                        <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="comments">Comments <p-sortIcon field="comments"></p-sortIcon>
-                        </th>
-                        <!-- <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
-                        </th> -->
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-product let-expanded="expanded">
-                    <tr>
-                        <td>
-                            <button type="button" pButton pRipple [pRowToggler]="product"
-                                class="p-button-text p-button-rounded p-button-plain"
-                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-                        </td>
-                        <td>{{product.number}}</td>
-                        <td>{{product.description}}</td>
-                        <td>
-                            {{product.comments}}
-                        </td>
-                        <!-- <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name"
-                                width="100" class="p-shadow-4" /></td> -->
-                        <!-- <td>{{product.price | currency:'USD'}}</td> -->
-                        <!-- <td>
-                            <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
-                        </td> -->
-                        <!-- <td><span
-                                [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
-                        </td> -->
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="rowexpansion" let-product>
-                    <tr>
-                        <td colspan="7">
-                            <div class="p-p-3">
-                                <p-table [value]="product.listDetails" dataKey="id">
-                                    <ng-template pTemplate="header">
-                    <tr>
-                        <th pSortableColumn="id">Drug Name <p-sortIcon field="DrugName"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="quentity">quentity <p-sortIcon field="quentity"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="supplierName">supplierName <p-sortIcon field="supplierName"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="price">price <p-sortIcon field="price"></p-sortIcon>
-                        </th>
-                        <!-- <th pSortableColumn="stats">Status <p-sortIcon field="status"></p-sortIcon>
-                        </th> -->
-                        <th style="width: 4rem"></th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-order>
-                    <tr>
-                        <td>{{order.drugName}}</td>
-                        <td>{{order.quentity}}</td>
-                        <td>{{order.supplierName}}</td>
-                        <td>{{order.price | currency:'USD'}}</td>
-                        <!-- <td><span [class]="'order-badge order-' + order.status.toLowerCase()">{{order.status}}</span>
-                        </td> -->
-                        <td>
-                            <p-button type="button" icon="pi pi-search"></p-button>
-                        </td>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                        <td colspan="6">There are no order for this product yet.</td>
-                    </tr>
-                </ng-template>
-            </p-table>
-</div>
-</td>
-</tr>
-</ng-template>
-</p-table>
-
-
-</p-tabPanel>
-</p-tabView>
+    </p-tabView>
 </div>

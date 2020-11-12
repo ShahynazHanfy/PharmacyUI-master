@@ -15,6 +15,7 @@ import { OrderVM } from 'src/app/Models/OrderViewModel';
 import {DrugInEachOrder} from '../../../Models/DrugInEachOrder'
 import {TreeNode} from 'primeng/api'
 import {NodesService} from '../../../services/nodes.service';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-add-order',
@@ -36,7 +37,7 @@ export class AddOrderComponent implements OnInit {
   selectedDrug: Drug
   orderDetails: OrderDetails[]
   pharmacy: Pharmacy[]
-  pledge: Pledge[]
+  pledges: Pledge[]
   supplier: Supplier[]
   selectedDrugName: string
   selectedsource: any = null
@@ -47,7 +48,8 @@ export class AddOrderComponent implements OnInit {
   pharmacyName:string
   orderVM:OrderVM[]
   drugInEachOrder:DrugInEachOrder[]
-
+  orderVM2:OrderVM[]
+ 
 
   DrugExistAfterElementDeleted: Drug[]
   constructor(private drugService: DrugService,
@@ -63,6 +65,7 @@ export class AddOrderComponent implements OnInit {
     this.orderDetails = []
     this.pharmacy = []
     this.orderVM =[]
+    this.orderVM2 = []
     
 
     });
@@ -71,7 +74,7 @@ export class AddOrderComponent implements OnInit {
     this.order = {
       code: '', comments: '', date: new Date(), description: '', number: 0,
       pharmacyLoggedInID:0,pharmacySourceID:0,pharmacyTargetID:0,
-      pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0
+      pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0,pendingStatus:true
 
     }
    
@@ -83,7 +86,7 @@ export class AddOrderComponent implements OnInit {
     this.newOrder = {
       code: '', comments: '', date: new Date(), description: '', number: 0,pharmacyTargetID:0,pharmacySourceID:0,
       pharmacyLoggedInID:0,
-      pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0
+      pledgeID: 0, supplierID: 0, orderDetailList: [], id: 0,pendingStatus:true
 
     }
     this.orderDetailObj = {
@@ -96,7 +99,7 @@ export class AddOrderComponent implements OnInit {
       })
 
     this.drugService.GetAllPledges().subscribe(pledge => {
-      this.pledge = pledge
+      this.pledges = pledge
     })
     this.drugService.GetAllSuppliers().subscribe(supplier => {
       this.supplier = supplier
@@ -105,10 +108,17 @@ export class AddOrderComponent implements OnInit {
 
     this.pharmacyLoggedInIDInlocalStorage=Number(this.pharmacyLoggedInIDInlocalStorage)
 
-    this.orderService.GetAllOrdersByPharmacyId(this.pharmacyLoggedInIDInlocalStorage).subscribe(A=>{
-      this.orderVM = A
+    this.orderService.GetAllOrdersByPharmacySourceId(this.pharmacyLoggedInIDInlocalStorage).subscribe(A=>{
+      this.orderVM = A //delivered from
     })
-
+    this.orderService.GetAllOrdersByPharmacyTargetId(this.pharmacyLoggedInIDInlocalStorage).subscribe(A=>{
+      this.orderVM2 = A //sent to 
+      console.log("this is vm2"+this.orderVM2)
+    })
+    this.drugService.GetAllPledges().subscribe(pledges=>{
+      this.pledges = pledges
+      console.log(this.pledges)
+    })
 
     this.pharmacyService.getPharmacyById(this.pharmacyLoggedInIDInlocalStorage)
     .subscribe(d=>{
@@ -134,6 +144,7 @@ export class AddOrderComponent implements OnInit {
     console.log(id)
     this.drugService.getDrugByID(id).subscribe(drug => {
       this.drug = drug;
+      console.log(this.drug)
       this.DrugAdded.push(drug)
     })
     // this.drug.IsChecked = !this.drug.IsChecked
@@ -150,6 +161,10 @@ export class AddOrderComponent implements OnInit {
         this.DrugAdded.splice(index, 1);
       }
     })
+  }
+  ReloadPage(){
+    
+    console.log("hello")
   }
 
   //   saveOrder(){
@@ -181,16 +196,19 @@ export class AddOrderComponent implements OnInit {
     console.log(this.selectedsource)
 
   }
+  
   eventForPharmacy(){
     console.log(this.selectedsource)
     console.log(this.pharmacyLoggedInIDInlocalStorage)
   }
+
   saveOrderList() {
     this.orderDetailObj.quentity=Number(this.orderDetailObj.quentity)
     this.order.pharmacyLoggedInID=this.pharmacyLoggedInIDInlocalStorage
     this.order.pharmacyLoggedInID = Number(this.order.pharmacyLoggedInID)
     this.order.pharmacyTargetID= Number(this.order.pharmacyTargetID)
     this.order.supplierID = Number(this.order.supplierID)
+    this.order.pledgeID = Number(this.order.pledgeID)
     this.order.number = Number(this.order.number)
     if (this.selectedsource=='Pharmacy') {
       console.log("pharmacy")
@@ -204,6 +222,7 @@ export class AddOrderComponent implements OnInit {
 
     console.log("ooorder",this.order)
   }
+
 
   SaveToList() {
     this.orderDetailObj.drugId = this.selectedDrug.id
@@ -221,6 +240,16 @@ export class AddOrderComponent implements OnInit {
     }
   }
 
+  UpdatePendingStatus(orderId:Number){
+    this.orderService.UpdatePendingStatus(orderId).subscribe(A=>{
+      console.log(A)
+
+    })
+    this.orderService.GetAllOrdersByPharmacyTargetId(this.pharmacyLoggedInIDInlocalStorage).subscribe(A=>{
+      this.orderVM2 = A //sent to 
+      console.log(this.orderVM2)
+    })
+  }
 
   deleteDrugFromList(drugDetails) {
     this.orderDetails.splice(this.orderDetails.indexOf(drugDetails), 1);

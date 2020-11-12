@@ -10,8 +10,7 @@ export class Order {
     supplierID:number;
     pharmacyLoggedInID:Number
     pharmacySourceID:Number
-    // pharmacyID:number;
-    // pharmacyDeliverdID:number;
+    pendingStatus:boolean
     pharmacyTargetID:number
     pledgeID:number
    orderDetailList:OrderDetails[]

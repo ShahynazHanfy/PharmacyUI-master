@@ -1,9 +1,9 @@
 export class Pledge {
     ID: number;
-      Name: string;
-      Address: string;
+      name: string;
+      address: string;
       telephone: string;
-      Email: string;
+      email: string;
       location:number;
       IsActive:boolean;
     }
