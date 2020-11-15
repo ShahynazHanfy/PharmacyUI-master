@@ -391,6 +391,7 @@ export class ShowDrugComponent implements OnInit {
 
   SubmitDrugName() {
     this.Drug.TheraSubGroupID = Number(this.Drug.TheraSubGroupID);
+    this.TheraGroupID= Number(this.TheraGroupID)
     this.Drug.FormID = Number(this.Drug.FormID);
     this.Drug.FirmID = Number(this.Drug.FirmID);
     console.log(typeof (this.Drug.FirmID))

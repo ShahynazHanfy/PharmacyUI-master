@@ -113,7 +113,7 @@ export class AddOrderComponent implements OnInit {
     })
     this.orderService.GetAllOrdersByPharmacyTargetId(this.pharmacyLoggedInIDInlocalStorage).subscribe(A=>{
       this.orderVM2 = A //sent to 
-      console.log("this is vm2"+this.orderVM2)
+      console.log("this is vm2www"+this.orderVM2+A)
     })
     this.drugService.GetAllPledges().subscribe(pledges=>{
       this.pledges = pledges
@@ -243,12 +243,12 @@ export class AddOrderComponent implements OnInit {
   UpdatePendingStatus(orderId:Number){
     this.orderService.UpdatePendingStatus(orderId).subscribe(A=>{
       console.log(A)
-
     })
     this.orderService.GetAllOrdersByPharmacyTargetId(this.pharmacyLoggedInIDInlocalStorage).subscribe(A=>{
-      this.orderVM2 = A //sent to 
-      console.log(this.orderVM2)
+      this.orderVM2 = A // List in (sent to) tab 
     })
+    
+
   }
 
   deleteDrugFromList(drugDetails) {

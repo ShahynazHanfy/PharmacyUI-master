@@ -38,11 +38,6 @@ languageList = [
     // this.siteLocale = window.location.pathname.split('/')[1];
     // console.log(this.siteLocale)    
     // this.siteLanguage = this.languageList.find(f => f.code === this.siteLocale).label;
-    
-
-
-
-
     this.role = localStorage.getItem("roles")
     console.log(this.role)
     this.items = [
@@ -85,20 +80,20 @@ languageList = [
             label: 'Form',
             routerLink: ['/home/form'],
             icon: 'pi pi-fw pi-align-center',
-            visible: this.role =='Admin'
+            visible: this.role =='SuperAdmin'|| this.role=='Admin'
           },
           {
             label: 'Firm',
             icon: 'pi pi-fw pi-align-justify',
             routerLink: ['/home/firm'],
-            visible: this.role =='Admin'
+            visible: this.role =='SuperAdmin'|| this.role=='Admin'
 
           },
           {
             label: 'Supplier',
             icon: 'pi pi-fw pi-align-justify',
             routerLink: ['/home/supplier'],
-            visible: this.role =='Admin'
+            visible: this.role =='SuperAdmin'|| this.role=='Admin'
 
 
           }
@@ -148,13 +143,13 @@ languageList = [
         label: 'Employees',
         icon: 'pi pi-fw pi-power-off',
         routerLink: ['employee'],
-        visible: this.role =='Admin'
+        visible: this.role =='SuperAdmin'|| this.role=='Admin'
       },
       {
         label: 'All Users',
         icon: 'pi pi-fw pi-power-off',
         routerLink: ['allusers'],
-        visible: this.role =='Admin'
+        visible: this.role =='SuperAdmin'|| this.role=='Admin'
 
       }
     ];

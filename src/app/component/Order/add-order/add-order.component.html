@@ -41,24 +41,23 @@
 
                     <div class="p-col-10 p-md-4">
                         <div class="p-inputgroup">
-                            <span class="p-inputgroup-addon">$</span>
+                            <span class="p-inputgroup-addon">Price</span>
                             <input type="text" pInputText placeholder="Price" [(ngModel)]="orderDetailObj.price">
                             <span class="p-inputgroup-addon">.00</span>
                         </div>
                     </div>
-
-
                     <div class="p-col-12 p-md-4">
                         <div class="p-inputgroup">
-                            <span class="p-inputgroup-addon">%</span>
-                            <input type="text" pInputText placeholder=" Quentity" [(ngModel)]="orderDetailObj.quentity">
+                            <span class="p-inputgroup-addon">Quantity</span>
+                            <input type="text" pInputText placeholder="Quentity" [(ngModel)]="orderDetailObj.quentity">
                             <!-- <span class="p-inputgroup-addon">.00</span> -->
                         </div>
                     </div>
                     <!-- <input type="button" name="AddToList" id="AddToList" value="Add To List" class="btn btn-primary"
                         (click)="SaveToList()"> -->
                     <button class="btn btn-primary" (click)="SaveToList()"
-                        style="width: 150px; height: 50px; margin-top: 23px;">Save Drug To List</button>
+                        style="width: 150px; height: 50px; margin-top: 23px; margin-left: 10px;">Save Drug To
+                        List</button>
                 </div>
             </div>
 
@@ -314,16 +313,22 @@
                         <!-- <button class="btn btn-danger">Delete</button> -->
                     </div>
                     <p-accordionTab header={{item.number}}>
-                        <p class="col" *ngIf="item.pharmacyTargetId != 0 " style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Delivered To
+                        <p class="col" *ngIf="item.pharmacyTargetId != 0 "
+                            style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Delivered To
                             <span style="color: rgb(28, 6, 153);"> {{item.pharmacyTarget}}</span> Pharmacy</p>
-                            <p class="col" *ngIf="item.pledgeId != 0 && item.supplierID==null " style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Delivered To
-                                <span style="color: rgb(28, 6, 153);"> {{item.pledgeName}}</span> Pledge</p>
-                                <p class="col" *ngIf="item.supplierID != null" style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Delivered To
-                                    <span style="color: rgb(28, 6, 153);"> {{item.supplierName}}</span> Company</p>
+                        <p class="col" *ngIf="item.pledgeId != null && item.supplierID==null "
+                            style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Delivered To
+                            <span style="color: rgb(28, 6, 153);"> {{item.pledgeName}}</span> Pledge</p>
+                        <p class="col" *ngIf="item.supplierID != null"
+                            style="color: rgb(170, 30, 30); font-weight: bold; font-size: 20px;">Delivered To
+                            <span style="color: rgb(28, 6, 153);"> {{item.supplierName}}</span> Company</p>
                         <p-accordion *ngFor="let quality of item.listDetails">
                             <p-accordionTab header={{quality.drugName}}>
                                 <div class="row">
-                                    <!-- <p class="col">{{quality.drugName}}</p> -->
+                                    <p class="col"><span style="font-weight: bold; color: rgb(28, 177, 53);">Drug
+                                            Quantity : </span> <span
+                                            style="color: rgb(204, 16, 16); font-weight: bold;">{{quality.quentityInEachOrder}}</span>
+                                    </p>
                                 </div>
                             </p-accordionTab>
                         </p-accordion>
@@ -358,7 +363,7 @@
                 <p-accordion *ngFor="let item of orderVM2">
                     <div style="float: right; margin-left: 50px;" *ngIf="item.pendingStatus == true">
                         <button class="btn btn-success" style="margin-right: 10px;"
-                            (click)="UpdatePendingStatus(item.orderId)">Pending</button>
+                            (click)="UpdatePendingStatus(item.orderId)">Confirm</button>
                         <button class="btn btn-danger">Delete</button>
                     </div>
                     <p-accordionTab header={{item.number}} *ngIf="item.pendingStatus == true">
@@ -368,7 +373,10 @@
                         <p-accordion *ngFor="let quality of item.listDetails">
                             <p-accordionTab header={{quality.drugName}}>
                                 <div class="row">
-                                    <!-- <p class="col">{{quality.drugName}}</p> -->
+                                    <p class="col"><span style="font-weight: bold; color: rgb(28, 177, 53);">Drug
+                                            Quantity : </span> <span
+                                            style="color: rgb(204, 16, 16); font-weight: bold;">{{quality.quentityInEachOrder}}</span>
+                                    </p>
                                 </div>
                             </p-accordionTab>
                         </p-accordion>
@@ -377,7 +385,7 @@
             </div>
         </p-tabPanel>
 
-        <p-tabPanel header="CONFIRMIED DELIVERED ORDERS" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990" >
+        <p-tabPanel header="CONFIRMIED DELIVERED ORDERS" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="1990">
             <div style="width: 100%;">
                 <p-accordion *ngFor="let item of orderVM2">
                     <div style="float: right; margin-left: 50px;" *ngIf="item.pendingStatus == false">
@@ -391,7 +399,10 @@
                         <p-accordion *ngFor="let quality of item.listDetails">
                             <p-accordionTab header={{quality.drugName}}>
                                 <div class="row">
-                                    <!-- <p class="col">{{quality.drugName}}</p> -->
+                                    <p class="col"><span style="font-weight: bold; color: rgb(28, 177, 53);">Drug
+                                            Quantity : </span> <span
+                                            style="color: rgb(204, 16, 16); font-weight: bold;">{{quality.quentityInEachOrder}}</span>
+                                    </p>
                                 </div>
                             </p-accordionTab>
                         </p-accordion>
@@ -399,7 +410,5 @@
                 </p-accordion>
             </div>
         </p-tabPanel>
-
-
     </p-tabView>
 </div>

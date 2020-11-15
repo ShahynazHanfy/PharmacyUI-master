@@ -145,8 +145,6 @@ export class AddDrugComponent implements OnInit {
 
 
   SubmitDrug() {
-    // console.log("sub")
-    // console.log(this.Drug); 
     this.Drug.TheraSubGroupID = Number(this.Drug.TheraSubGroupID);
     this.Drug.FormID = Number(this.Drug.FormID);
     this.Drug.FirmID = Number(this.Drug.FirmID);

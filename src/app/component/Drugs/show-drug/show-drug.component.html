@@ -283,11 +283,11 @@
     <ng-template pTemplate="caption">
 
         <div class="table-header">
-            <button type="button" style="margin-right: 10px;" [disabled]="" class="btn btn-primary"
+            <button type="button" style="margin-right: 10px;"  [disabled]="" class="btn btn-primary"
                 (click)="showModalDialog()" i18n>Add New
                 Drug</button>
 
-            <button type="button" style="margin-right: 10px;" *ngIf="EmpRole=='Admin'" [disabled]=""
+            <button type="button" style="margin-right: 10px;" *ngIf="EmpRole=='SuperAdmin'" [disabled]=""
                 class="btn btn-success" (click)="showModalDialog1()" i18n>Add Drug Name
             </button>
 
@@ -303,7 +303,6 @@
         <tr>
             <th>Trade Name</th>
             <th>Image</th>
-            <!-- <th>Representative</th> -->
             <th>Price</th>
             <th>Quantity</th>
             <th>Re_Order_Level</th>

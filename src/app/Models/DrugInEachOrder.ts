@@ -5,7 +5,7 @@ export class DrugInEachOrder{
     supplierName: string
     pendingStatus:boolean
     drugName: string
-    quentity: number
+    quentityInEachOrder: number
     price: number
     prod_Date: Date
     exp_Date: Date
