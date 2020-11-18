@@ -227,9 +227,6 @@
                 <option *ngFor="let the of Form" value="{{the.id}}">{{the.name}}</option>
             </select>
         </div>
-
-
-
         <div class="col">
             <label class="labelstyle" i18n>Select Firm Name</label>
             <select [(ngModel)]="Drug.FirmID" name="firm" class="form-control">Profession
@@ -244,9 +241,6 @@
                 <option *ngFor="let u of Unit" value="{{u.id}}">{{u.name}}</option>
             </select>
         </div>
-
-
-
         <div class="col">
             <label class="labelstyle" i18n>Select Country Name</label>
             <select [(ngModel)]="Drug.CountryID" name="Country" class="form-control">Profession
@@ -283,7 +277,7 @@
     <ng-template pTemplate="caption">
 
         <div class="table-header">
-            <button type="button" style="margin-right: 10px;"  [disabled]="" class="btn btn-primary"
+            <button type="button" style="margin-right: 10px;" [disabled]="" class="btn btn-primary"
                 (click)="showModalDialog()" i18n>Add New
                 Drug</button>
 
@@ -296,7 +290,6 @@
                 <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                     placeholder="Global Search" />
             </span>
-
         </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -382,7 +375,7 @@
             </td> -->
             <td>
                 <div class="progress" *ngIf="drugsDetailsViewModel.quentity>100">
-                    <div class="progress-bar bg-success" role="progressbar"  style="width: 100%" aria-valuenow="25"
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <!-- <div class="progress" *ngIf="greaterThan(drugsDetailsViewModel.quentity)">
@@ -391,7 +384,7 @@
                         aria-valuemin="0" aria-valuemax="50"></div>
                 </div> -->
                 <div class="progress" *ngIf="lessThan(drugsDetailsViewModel.quentity)">
-                    <div class="progress-bar bg-warning" role="progressbar"  style="width: 50%" aria-valuenow="50"
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50"
                         aria-valuemin="0" aria-valuemax="50"></div>
                 </div>
                 <div class="progress" *ngIf="drugsDetailsViewModel.quentity == 0">

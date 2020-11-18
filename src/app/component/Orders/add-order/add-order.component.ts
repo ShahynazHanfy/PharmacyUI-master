@@ -16,10 +16,15 @@ import {DrugInEachOrder} from '../../../Models/DrugInEachOrder'
 import {TreeNode} from 'primeng/api'
 import {NodesService} from '../../../services/nodes.service';
 import {MenuItem} from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import {DialogService} from 'primeng/dynamicdialog';
+;
+
 
 @Component({
   selector: 'app-add-order',
   templateUrl: './add-order.component.html',
+  providers: [DialogService, MessageService],
   styleUrls: ['./add-order.component.css']
 })
 export class AddOrderComponent implements OnInit {
@@ -47,14 +52,19 @@ export class AddOrderComponent implements OnInit {
   pharmacyObj:Pharmacy
   pharmacyName:string
   orderVM:OrderVM[]
+  orderVMObj:OrderVM
+
   drugInEachOrder:DrugInEachOrder[]
   orderVM2:OrderVM[]
+ 
  
 
   DrugExistAfterElementDeleted: Drug[]
   constructor(private drugService: DrugService,
     private nodeService: NodesService,
-    private orderService: OrderService, private pharmacyService: PharmacyService) {
+    private orderService: OrderService, 
+    private pharmacyService: PharmacyService,
+    ) {
 
     this.DrugAdded = []
     this.newOrderDetails = []
@@ -166,6 +176,7 @@ export class AddOrderComponent implements OnInit {
     
     console.log("hello")
   }
+  
 
   //   saveOrder(){
   //     // console.log(this.DrugAdded)

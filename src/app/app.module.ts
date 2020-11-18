@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule } from '@angular/core';
 import {AccordionModule} from 'primeng/accordion';    
 import { AppComponent } from './app.component';
 import {MenubarModule} from 'primeng/menubar';
@@ -55,8 +55,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { HomeComponent } from './component/home/home.component';
 import {FormComponent} from '../app/component/form/form.component';
-import { ShowOrderComponent } from './component/order/show-order/show-order.component';
-import { AddOrderComponent } from './component/Order/add-order/add-order.component'
+import { AddOrderComponent } from '../app/component/Orders/add-order/add-order.component'
 import {PickListModule} from 'primeng/picklist';
 import {OrderListModule} from 'primeng/orderlist';
 import {OrderDetails} from '../app/Models/OrderDetails';
@@ -74,7 +73,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -83,6 +82,12 @@ import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { NodesService } from '../app/services/nodes.service';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {TreeModule} from 'primeng/tree';
+import { TestComponent } from './test/test.component';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Test2Component } from './test2/test2.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+// import { MaterialModule} from '@angular/material';
 
 
 registerLocaleData(en);
@@ -104,10 +109,12 @@ registerLocaleData(en);
     HomeComponent,
     // RrComponent,
     FormComponent,
-    ShowOrderComponent,
     AddOrderComponent,
     EmployeeComponent,
     AllUserComponent,
+    TestComponent,
+    Test2Component,
+
     
   ],
   imports: [
@@ -118,6 +125,7 @@ registerLocaleData(en);
     FormsModule,
     TreeModule,
     InputTextareaModule,
+    MatTooltipModule,
     InputTextModule,
     CalendarModule,
     AccordionModule,
@@ -164,10 +172,19 @@ registerLocaleData(en);
     NzIconModule,
     VirtualScrollerModule,
     PanelMenuModule,
+    CommonModule,
+    DynamicDialogModule,
+    ToastModule,
+    TableModule,
+    ButtonModule,
     // ConfirmationService,
     RouterModule.forRoot([]),
  
   ],
+  // schemas: [
+  //   CUSTOM_ELEMENTS_SCHEMA,
+  //   NO_ERRORS_SCHEMA
+  // ],
   providers: [
     DrugService,NodesService,
     MessageService,ConfirmationService, { provide: NZ_I18N, useValue: en_US },

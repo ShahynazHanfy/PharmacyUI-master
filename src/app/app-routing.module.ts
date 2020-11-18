@@ -16,11 +16,11 @@ import {FirmComponent} from '../app/component/Firm/firm/firm.component'
 import {HomeComponent} from './component/home/home.component'
 // import {RrComponent} from './component/form/form.component'
 import {FormComponent} from '../app/component/form/form.component'
-import {AddOrderComponent} from '../app/component/Order/add-order/add-order.component'
+import {AddOrderComponent} from '../app/component/Orders/add-order/add-order.component'
 import{EmployeeComponent} from './component/Employee/emplyee/employee.component'
-
+import {Test2Component} from '../app/test2/test2.component'
 import { AllUserComponent } from './component/Users/all-user/all-user.component';
-
+import {DashboardComponent} from '../app/component/dashboard/dashboard.component'
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -46,6 +46,11 @@ const routes: Routes = [
     { path: 'form', component: FormComponent },  
     { path: 'employee', component: EmployeeComponent },  
     { path: 'allusers', component: AllUserComponent },  
+    { path: 'test2', component: Test2Component },  
+    { path: 'dashboard', component: DashboardComponent },  
+
+    
+
 
     // { path: 'addOrder', component: AddOrderComponent },  
   ]}
